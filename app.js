@@ -39,3 +39,50 @@ var URLUtils = {
         return parsedUrl;
     }
 };
+
+var Foursquare = (function() {
+    var accessToken;
+    var CLIENT_ID = 'CMLELAZKKVF3DUWDTABSU01U4DUYLM2DTTPKOSWWU15N25MR';
+    var APP_URL = 'https://4s.vergilpenkov.com/';
+
+    /**
+     * Gets the access token for Foursquare.
+     */
+    function getAccessToken() {
+    }
+
+    /**
+     * Displays the login button and binds event listeners
+     */
+    function showLogin() {
+        var loginButton = document.querySelector('.js-login-button');
+        loginButton.removeAttribute('hidden');
+        loginButton.setAttribute('href', REDIRECT_URL);
+    }
+
+    /**
+     * Initialize the Foursquare functionality.
+     * Show the login button if user doesn't have an access token.
+     */
+    function init() {
+        accessToken = getAccessToken();
+        
+        if (accessToken) {
+            drawMapResults();
+            getNearbyVenues();
+        }
+
+        showLogin();
+    }
+    
+    function drawMapResults() {}
+
+    // Public API
+    return {
+        init: init
+    };
+}());
+
+document.addEventListener('DOMContentLoaded', function() {
+    Foursquare.init();
+});
