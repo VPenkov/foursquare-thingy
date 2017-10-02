@@ -68,16 +68,14 @@ var Foursquare = (function() {
         accessToken = getAccessToken();
         
         if (accessToken) {
-            drawMapResults();
             getNearbyVenues();
-
             return;
         }
 
         showLogin();
     }
     
-    function drawMapResults() {}
+    function getNearbyVenues() {}
 
     // Public API
     return {
