@@ -162,6 +162,15 @@ var SiteControls = {
             rangeIndicator.innerText = this.value;
             Foursquare.getNearbyVenues(this.value);
         });
+    },
+
+    /**
+     * Shows the main content.
+     * Called when a user has logged in.
+     */
+    showMainContent: function() {
+        var mainContent = document.querySelector('.js-main-content');
+        mainContent.removeAttribute('hidden');
     }
 };
 
@@ -330,8 +339,10 @@ var Foursquare = (function() {
      * Displays the login button and binds event listeners
      */
     function showLogin() {
-        var loginButton = document.querySelector('.js-login-button');
-        loginButton.removeAttribute('hidden');
+        var login = document.querySelector('.js-login');
+        var loginButton = login.querySelector('.js-login-button');
+        
+        login.removeAttribute('hidden');
         loginButton.setAttribute('href', REDIRECT_URL);
     }
 
@@ -398,6 +409,7 @@ var Foursquare = (function() {
             if (accessToken) {
                 GoogleMaps.init();
                 SiteControls.initDistanceSelector();
+                SiteControls.showMainContent();
                 this.getNearbyVenues();
 
                 return;
