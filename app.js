@@ -44,7 +44,20 @@ var URLUtils = {
  * Basic Ajax handler.
  */
 var Ajax = (function() {
-
+    
+    /**
+     * Convenience AJAX get method on top of XHR.
+     * @param {Object} options {
+     *   url {String}: the URL to get from,
+     *   params {Object}: parameter key-value pairs,
+     *   data {Object}: {
+     *     oauth_token {String}: the access token,
+     *     v {Number}: The version in format YYYYMMDD
+     *   }
+     *   success {Function}: a callback function on success,
+     *   error {Function}: a callback function on error
+     * }
+     */
     function get(options) {
         var request, url;
         if (!options || !options.url) {
@@ -61,14 +74,14 @@ var Ajax = (function() {
         request.onload = function() {
             options.success(request);
         };
- 
+    
         request.onerror = options.error || function(error) {
             throw new Error(JSON.stringify(error));
         };
 
         request.send();
     }
-    
+
     // Public API
     return {
         get: get
