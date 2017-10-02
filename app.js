@@ -40,6 +40,37 @@ var URLUtils = {
     }
 };
 
+/**
+ * Basic Ajax handler.
+ */
+var Ajax = (function() {
+
+    function get(options) {
+        var request = request = new XMLHttpRequest();
+        options.success = options.success || function() {};
+        options.params = options.params || {};
+        var url = URLUtils.appendParams(options.url, options.params);
+
+        
+        request.open('GET', url, true);
+
+        request.onload = function() {
+            options.success(request);
+        };
+ 
+        request.onerror = options.error || function(error) {
+            throw new Error(JSON.stringify(error));
+        };
+
+        request.send();
+    }
+    
+    // Public API
+    return {
+        get: get
+    }
+}());
+
 var Foursquare = (function() {
     var accessToken;
     var CLIENT_ID = 'CMLELAZKKVF3DUWDTABSU01U4DUYLM2DTTPKOSWWU15N25MR';
