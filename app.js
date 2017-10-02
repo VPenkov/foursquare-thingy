@@ -132,8 +132,17 @@ var GoogleMaps = (function() {
 
 var Foursquare = (function() {
     var accessToken;
-    var CLIENT_ID = 'CMLELAZKKVF3DUWDTABSU01U4DUYLM2DTTPKOSWWU15N25MR';
     var APP_URL = 'https://4s.vergilpenkov.com/';
+    
+    // Authentication
+    var FOURSQUARE_CLIENT_ID = 'CMLELAZKKVF3DUWDTABSU01U4DUYLM2DTTPKOSWWU15N25MR';
+    var FOURSQUARE_OAUTH_URL = 'https://foursquare.com/oauth2';
+    var FOURSQUARE_AUTH_URL = FOURSQUARE_OAUTH_URL + '/authenticate?client_id=' + FOURSQUARE_CLIENT_ID;
+    var REDIRECT_URL = FOURSQUARE_AUTH_URL + '&response_type=token&redirect_uri=' + APP_URL;
+
+    // API endpoints
+    var FOURSQUARE_API_URL = 'https://api.foursquare.com/v2';
+    var FOURSQUARE_VENUES_URL = FOURSQUARE_API_URL + '/venues/search';
 
     /**
      * Gets the access token for Foursquare.
