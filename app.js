@@ -243,7 +243,32 @@ var Foursquare = (function() {
         }
     }
     
-    function getNearbyVenues() {}
+    /**
+     * Queries Foursquare for nearby venues and adds them on the map
+     */
+    function getNearbyVenues() {
+        navigator.geolocation.getCurrentPosition(
+            function(result) {
+                var coordinates = result.coords;
+
+                return Ajax.get({
+                    url: FOURSQUARE_VENUES_URL,
+                    params: {
+                        oauth_token: accessToken,
+                        ll: [coordinates.latitude, coordinates.longitude].join(','),
+                        v: 20160801,
+                        m: 'foursquare'
+                    },
+                    success: function(xhr) {
+                        var results = JSON.parse(xhr.response);
+                        console.log(results.response);
+                    }
+                });
+            },
+            function() {
+                throw new Error('Geolocation is disabled');
+            });
+    }
 
     /**
      * Displays the login button and binds event listeners
