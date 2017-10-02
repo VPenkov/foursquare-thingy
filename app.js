@@ -70,6 +70,8 @@ var Foursquare = (function() {
         if (accessToken) {
             drawMapResults();
             getNearbyVenues();
+
+            return;
         }
 
         showLogin();
