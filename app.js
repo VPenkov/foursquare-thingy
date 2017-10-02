@@ -241,6 +241,14 @@ var GoogleMaps = (function() {
         markersOnMap = [];
     }
 
+    /**
+     * Moves the map to a location
+     * @param {String|Object} location - geocodable location
+     */
+    function moveMapTo(location) {
+        googleMap.setCenter(new mapInstance.LatLng(location));
+    }
+
     // Public API
     return {
 
@@ -249,7 +257,7 @@ var GoogleMaps = (function() {
          * Creates a DOM node, then sends a callback method name as a URI parameter.
          * Callback needs to be a global method.
          */
-        init: function() {
+        init: function(callback) {
             if (this.hasStarted) {
                 return;
             }
@@ -261,6 +269,10 @@ var GoogleMaps = (function() {
                 googleMap = new mapInstance.Map(MAP_CONTAINER, SETTINGS);
                 infoWindow = new mapInstance.InfoWindow();
                 this.hasStarted = true;
+
+                if (typeof callback === 'function') {
+                    callback();
+                }
             };
 
             var mapNode = document.createElement('script');
@@ -285,6 +297,8 @@ var GoogleMaps = (function() {
             for (var i = 0; i < venues.length; i++) {
                 addMarker(venues[i]);
             }
+
+            moveMapTo(venues[0].location);
         }
     };
 }());
@@ -403,16 +417,14 @@ var Foursquare = (function() {
             this.hasStarted = true;
             accessToken = getAccessToken();
 
-            if (accessToken) {
-                GoogleMaps.init();
-                SiteControls.initDistanceSelector();
-                SiteControls.showMainContent();
-                this.getNearbyVenues();
-
+            if (!accessToken) {
+                showLogin();
                 return;
             }
-
-            showLogin();
+            
+            GoogleMaps.init(this.getNearbyVenues());
+            SiteControls.initDistanceSelector();
+            SiteControls.showMainContent();
         }
     };
 }());
