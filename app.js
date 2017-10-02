@@ -183,11 +183,8 @@ var GoogleMaps = (function() {
     var API_KEY = 'AIzaSyAyQ3ELRKDAlnC5UEpAm2UPnWUIBpN6ihE';
     var SETTINGS = {
         center: {
-
-            // lat: 52.376356,
-            // lng: 4.905937
-            lat: 42.696832,
-            lng: 23.289583
+            lat: 52.376356,
+            lng: 4.905937
         },
         fullscreenControl: false,
         mapTypeControl: false,
