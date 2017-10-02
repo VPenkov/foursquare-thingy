@@ -41,6 +41,76 @@ var URLUtils = {
 };
 
 /**
+ * Read/write component for cookies.
+ * Heavily borrowed from Peter-Paul Koch.
+ * See {@link https://www.quirksmode.org/js/cookies.html QuirksMode}
+ */
+var Cookies = (function() {
+    /**
+     * Generates an expiration value for a cookie
+     * @param {String} days - the amount of days
+     * @return {String} - the expiration value
+     */
+    function createCookieExpirationValue(days) {
+        var date;
+        if (!days) {
+            return '';
+        }
+
+        date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        return '; expires=' + date.toGMTString();
+    }
+
+    /**
+     * Creates a cookie
+     * @param {String} name - the cookie's name
+     * @param {String} value - the cookie's value
+     * @param {Number} days - expire after this many days
+     */
+    function createCookie(name, value, days) {
+        var expires = createCookieExpirationValue(days);
+        name = encodeURIComponent(name);
+        value = encodeURIComponent(value);
+
+        document.cookie = name + '=' + value + expires + '; path=/';
+    }
+
+    /**
+     * Fetches a cookie by name
+     * @param {String} name - the cookie's name
+     * @returns {?String} - the cookie
+     */
+    function readCookie(name) {
+        var cookie;
+        var cookieName = encodeURIComponent(name) + '=';
+        var siteCookies = document.cookie.split(';');
+
+        for (var i = 0; i < siteCookies.length; i++) {
+            cookie = siteCookies[i];
+
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1, cookie.length);
+            }
+
+            if (cookie.indexOf(cookieName) === 0) {
+                return decodeURIComponent(
+                    cookie.substring(cookieName.length, cookie.length)
+                );
+            }
+        }
+
+        return null;
+    }
+
+    // Public API
+    return {
+        createCookie: createCookie,
+        readCookie: readCookie
+    };
+}());
+
+/**
  * Basic Ajax handler.
  */
 var Ajax = (function() {
