@@ -1,0 +1,204 @@
+/* ==========
+ * Fonts 
+ */
+ @font-face {
+    font-family: 'Kelson';
+    font-weight: 700;
+    font-style: normal;
+    src: url('fonts/ks_bold.woff2') format('woff2'),
+        url('fonts/ks_bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/roboto_regular.woff2') format('woff2'),
+        url('fonts/roboto_regular.woff') format('woff');
+}
+/* ==========
+ * Fonts 
+ */
+
+
+
+/* ==========
+ * Base styles 
+ */
+:root {
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-size: 62.5%; /* roughly 10 */
+}
+
+body {
+    font-size: 1.8rem;
+    margin: 0;
+}
+/* ==========
+ * /Base styles 
+ */
+
+
+
+/* ==========
+ * Main elements 
+ */
+.site-header {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.main-content,
+.foursquare-login {
+    text-align: center;
+}
+
+.google-map {
+    height: 40vmax;
+    margin: 2rem auto;
+    width: 80%;
+}
+/* ==========
+ * /Main elements 
+ */
+
+
+
+/* ==========
+ * Elements 
+ */
+.site-header__title {
+    color: #0732a2;
+    font-family: 'Kelson', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 5rem;
+    margin: 0;
+}
+
+.foursquare-login__button {
+    color: #fff;
+    background-color: #f94877;
+    display: inline-block;
+    font-family: 'Kelson', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding: 1.5rem 3rem;
+    text-decoration: none;
+    transition: background-color .2s ease-in;
+}
+
+.foursquare-login__button:hover {
+    background-color: #2d5be3;
+}
+
+.distance-filter__range {
+    color: #0732a2;
+}
+/* ==========
+ * /Elements 
+ */
+
+
+/* ==========
+ * Widgets 
+ */
+/* Range slider */
+.distance-filter__selector {
+    -webkit-appearance: none;
+    margin: 1rem 0;
+    width: 40%;
+}
+
+.distance-filter__selector:focus {
+    outline: none;
+}
+
+.distance-filter__selector::-webkit-slider-runnable-track {
+    width: 40%;
+    height: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0;
+    background: #f94877;
+    border-radius: 2.5rem;
+    border: 0;
+}
+
+.distance-filter__selector::-webkit-slider-thumb {
+    box-shadow: 0;
+    border: 0;
+    height: 2rem;
+    width: 4rem;
+    border-radius: .7rem;
+    background: #0732a2;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -.4rem;
+}
+
+.distance-filter__selector:focus::-webkit-slider-runnable-track {
+    background: #f94877;
+}
+
+.distance-filter__selector::-moz-range-track {
+    width: 40%;
+    height: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0;
+    background: #f94877;
+    border-radius: 2.5rem;
+    border: 0;
+}
+
+.distance-filter__selector::-moz-range-thumb {
+    box-shadow: 0;
+    border: 0;
+    height: 2rem;
+    width: 4rem;
+    border-radius: 7px;
+    background: #0732a2;
+    cursor: pointer;
+}
+
+.distance-filter__selector::-ms-track {
+    width: 40%;
+    height: 1.3rem;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 4rem 0;
+    color: transparent;
+}
+
+.distance-filter__selector::-ms-fill-lower {
+    background: #f94877;
+    border: 0;
+    border-radius: 5rem;
+    box-shadow: 0;
+}
+
+.distance-filter__selector::-ms-fill-upper {
+    background: #f94877;
+    border: 0;
+    border-radius: 5rem;
+    box-shadow: 0;
+}
+
+.distance-filter__selector::-ms-thumb {
+    box-shadow: 0;
+    border: 0;
+    height: 2rem;
+    width: 4rem;
+    border-radius: 7px;
+    background: #0732a2;
+    cursor: pointer;
+}
+
+.distance-filter__selector:focus::-ms-fill-lower {
+    background: #f94877;
+}
+
+.distance-filter__selector:focus::-ms-fill-upper {
+    background: #f94877;
+}
+/* /Range slider */
+
+/* ==========
+ * /Widgets 
+ */
