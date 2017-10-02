@@ -81,6 +81,7 @@ var Ajax = (function() {
 var GoogleMaps = (function() {
     var mapInstance;
     var MAP_CONTAINER = document.querySelector('.js-map');
+    var API_KEY = 'AIzaSyAyQ3ELRKDAlnC5UEpAm2UPnWUIBpN6ihE';
     var SETTINGS = {
         center: {
             lat: 52.376356,
@@ -93,11 +94,16 @@ var GoogleMaps = (function() {
         zoom: 14
     }
 
+    /**
+     * Map initializer.
+     * Creates a DOM node, then sends a callback method name as a URI parameter.
+     * Callback needs to be a global method.
+     */
     function init() {
         window.googleMapCallback = function() {
             mapInstance = window.google.maps;
             
-            mapInstance(MAP_CONTAINER, SETTINGS);
+            new mapInstance.Map(MAP_CONTAINER, SETTINGS);
         };
 
         var mapNode = document.createElement('script');
