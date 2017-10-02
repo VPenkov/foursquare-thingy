@@ -46,12 +46,16 @@ var URLUtils = {
 var Ajax = (function() {
 
     function get(options) {
-        var request = request = new XMLHttpRequest();
+        var request, url;
+        if (!options || !options.url) {
+            throw new Error('Ajax.get() needs an "options" object with a "url" property.');
+        }
+
         options.success = options.success || function() {};
         options.params = options.params || {};
-        var url = URLUtils.appendParams(options.url, options.params);
+        url = URLUtils.appendParams(options.url, options.params);
 
-        
+        request = new XMLHttpRequest();
         request.open('GET', url, true);
 
         request.onload = function() {
@@ -68,6 +72,42 @@ var Ajax = (function() {
     // Public API
     return {
         get: get
+    }
+}());
+
+/**
+ * Google Maps wrapper
+ */
+var GoogleMaps = (function() {
+    var mapInstance;
+    var MAP_CONTAINER = document.querySelector('.js-map');
+    var SETTINGS = {
+        center: {
+            lat: 52.376356,
+            lng: 4.905937
+        },
+        fullscreenControl: false,
+        mapTypeControl: false,
+        scrollwheel: false,
+        streetViewControl: false,
+        zoom: 14
+    }
+
+    function init() {
+        window.googleMapCallback = function() {
+            mapInstance = window.google.maps;
+            
+            mapInstance(MAP_CONTAINER, SETTINGS);
+        };
+
+        var mapNode = document.createElement('script');
+        mapNode.src = '//maps.googleapis.com/maps/api/js?callback=googleMapCallback&key=' + API_KEY;
+        document.body.appendChild(mapNode);
+    }
+
+    // Public API
+    return {
+        init: init
     }
 }());
 
