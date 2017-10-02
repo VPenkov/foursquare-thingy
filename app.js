@@ -203,7 +203,7 @@ var GoogleMaps = (function() {
 var Foursquare = (function() {
     var accessToken;
     var APP_URL = 'https://4s.vergilpenkov.com/';
-    
+
     // Authentication
     var FOURSQUARE_CLIENT_ID = 'CMLELAZKKVF3DUWDTABSU01U4DUYLM2DTTPKOSWWU15N25MR';
     var FOURSQUARE_OAUTH_URL = 'https://foursquare.com/oauth2';
@@ -216,9 +216,34 @@ var Foursquare = (function() {
 
     /**
      * Gets the access token for Foursquare.
+     * First it tries to get it from a cookie, then from the URL.
+     * The URL case is after Foursquare redirects us back after clicking on the login button
+     * @returns {String} - the access token
      */
     function getAccessToken() {
+        var token, tokenLocation, foursquareHash;
+
+        // Try to get from cookie
+        token = Cookies.readCookie('foursquare');
+        if (token) {
+            return token;
+        }
+
+        // use location.href instead of hash because it won't work on DOMContentLoaded
+        foursquareHash = '#access_token=';
+        tokenLocation = window.location.href.indexOf(foursquareHash);
+
+        // Create a cookie and return the token
+        if (tokenLocation > 0) {
+            tokenLocation += foursquareHash.length; // remove the hash parameter
+            token = window.location.href.slice(tokenLocation);
+            Cookies.createCookie('foursquare', token);
+
+            return token;
+        }
     }
+    
+    function getNearbyVenues() {}
 
     /**
      * Displays the login button and binds event listeners
@@ -243,8 +268,6 @@ var Foursquare = (function() {
 
         showLogin();
     }
-    
-    function getNearbyVenues() {}
 
     // Public API
     return {
