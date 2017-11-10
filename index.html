@@ -8,17 +8,41 @@
     <meta name="description" content="Foursquare sample API">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style></style>
+    <link rel="preload" href="fonts/ks_bold.woff2" as="font" crossorigin>
+    <link rel="preload" href="fonts/roboto_regular.woff2" as="font" crossorigin>
+    <link rel="preload" href="style.css" as="style">
 </head>
 
-<body>    
-    <section class="login">
-        <a href="#" class="login__button js-login-button" hidden>Log into Foursquare</a>
+<body>
+    <link rel="stylesheet" href="style.css">
+    
+    <header class="site-header">
+        <h1 class="site-header__title" title="Hehe, get it? :-)">
+            4<sup>2</sup> API demo
+        </h1>
+    </header>
+    
+    <section class="foursquare-login js-login" hidden>
+        <a href="#" class="foursquare-login__button js-login-button">Log into Foursquare</a>
     </section>
 
-    <main>
-        <section class="map js-map"></section>
-    </main>
+    <main class="main-content js-main-content" hidden>
+        <div class="distance-filter">
+            <input min="500" max="5000" step="100" value="500"
+                type="range" class="distance-filter__selector js-max-range">
+
+                <p class="distance-filter__content">
+                Showing venues within
+                <span class="distance-filter__range js-max-range-indicator">500</span>
+                meters.
+
+                <br>
+                Move the slider to adjust.
+            </p>
+        </div>
+
+        <section class="google-map js-map"></section>
+    </mai>
 
     <script src="app.js"></script>
 </body>
